@@ -2,11 +2,13 @@ package com.pd.pong.controller;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.pd.pong.Pong;
 import com.pd.pong.model.Ball;
 import com.pd.pong.model.GameModel;
 
 import java.lang.System.*;
 
+import static com.pd.pong.Pong.netmode;
 import static java.lang.System.out;
 
 
@@ -19,7 +21,11 @@ public class GameController implements ContactListener {
 
     public GameController(GameModel model) {
         this.model = model;
-        this.batController = new PlayerBatController(model.getPlayerBat(), model.getWorld());
+        if(netmode){
+            this.batController = new NetBatController(model);
+        }else{
+            this.batController = new PlayerBatController(model.getPlayerBat(), model.getWorld());
+        }
         this.model.getBall().getBody().applyLinearImpulse(-BALL_SPEED, BALL_SPEED, 0f, 0f, true);
         this.model.getWorld().setContactListener(this);
     }
@@ -28,13 +34,22 @@ public class GameController implements ContactListener {
 //        out.println("controller update");
         batController.update(delta);
         model.increaseScore(delta);
+        if(model.getScore() >= 660){
+            onGameOver();
+        }
     }
 
     private void onGameOver() {
-        out.println("GAMEOVER");
-        float finalScore = model.getScore();
-        out.println("finalScore: " + finalScore);
-        System.exit(0);
+//        out.println("GAMEOVER");
+        Pong.finalScore = model.getScore();
+        Pong.gamestate = Pong.Gamestate.GAMEOVER;
+        if (netmode){
+            return;
+        }
+        else{
+//            System.exit(0);
+            return;
+        }
     }
 
     @Override

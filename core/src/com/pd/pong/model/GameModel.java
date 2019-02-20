@@ -3,6 +3,8 @@ package com.pd.pong.model;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
+import static java.lang.System.out;
+
 public class GameModel {
 
     public static final float WORLD_WIDTH = 10;
@@ -23,7 +25,11 @@ public class GameModel {
 
     public GameModel(World world) {
         this.world = world;
-        ball = new Ball(world, new Vector2(5, 3));
+//        ball = new Ball(world, new Vector2(5, 3));
+        float posx = (float) Math.random()*6 + 3;
+        float posy = (float) Math.random()*5 + 0;
+        out.println("posx: " + posx + ", posy: " + posy);
+        ball = new Ball(world, new Vector2(posx, posy));
         playerBat = new Bat(world, new Vector2(0.5f, WORLD_HEIGHT / 2f));
 
         //wallBottom

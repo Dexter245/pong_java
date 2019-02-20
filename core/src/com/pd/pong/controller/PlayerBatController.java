@@ -10,7 +10,7 @@ import static java.lang.System.out;
 
 public class PlayerBatController extends BatController {
 
-    private static final float SPEED = 3.0f;
+    public static final float SPEED = 3.0f;
 
     public PlayerBatController(Bat bat, World world) {
         super(bat);

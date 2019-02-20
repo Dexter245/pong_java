@@ -3,19 +3,28 @@ apply plugin: "java"
 sourceCompatibility = 1.6
 sourceSets.main.java.srcDirs = [ "src/" ]
 
-project.ext.mainClassName = "com.pd.pong.desktop.DesktopLauncher"
+project.ext.mainClassNamePong = "com.pd.pong.desktop.DesktopLauncher"
+project.ext.mainClassNameNeat = "com.pd.pong.Neat"
 project.ext.assetsDir = new File("../core/assets");
 
-task run(dependsOn: classes, type: JavaExec) {
-    main = project.mainClassName
+task runPong(dependsOn: classes, type: JavaExec) {
+    main = project.mainClassNamePong
     classpath = sourceSets.main.runtimeClasspath
     standardInput = System.in
     workingDir = project.assetsDir
     ignoreExitValue = true
 }
 
-task debug(dependsOn: classes, type: JavaExec) {
-    main = project.mainClassName
+task runNeat(dependsOn: classes, type: JavaExec) {
+    main = project.mainClassNameNeat
+    classpath = sourceSets.main.runtimeClasspath
+    standardInput = System.in
+    workingDir = project.assetsDir
+    ignoreExitValue = true
+}
+
+task debugPong(dependsOn: classes, type: JavaExec) {
+    main = project.mainClassNamePong
     classpath = sourceSets.main.runtimeClasspath
     standardInput = System.in
     workingDir = project.assetsDir
@@ -30,7 +39,7 @@ task dist(type: Jar) {
     from files(project.assetsDir);
  
     manifest {
-        attributes 'Main-Class': project.mainClassName
+        attributes 'Main-Class': project.mainClassNamePong
     }
 }
 

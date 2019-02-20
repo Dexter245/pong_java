@@ -31,8 +31,8 @@ public class DefaultRenderer implements Renderer {
         camera = new OrthographicCamera(width, height);
         camera.translate(x, y, 0f);
         camera.update();
-        out.println("width: " + width + ", height. " + height + ", x: " + x + ", y: " + y);
-        out.println("camera.position: " + camera.position);
+//        out.println("width: " + width + ", height. " + height + ", x: " + x + ", y: " + y);
+//        out.println("camera.position: " + camera.position);
 
         camera2 = new OrthographicCamera(1280, 720);
         camera2.update();
