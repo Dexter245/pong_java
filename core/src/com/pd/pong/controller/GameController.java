@@ -6,8 +6,6 @@ import com.pd.pong.Pong;
 import com.pd.pong.model.Ball;
 import com.pd.pong.model.GameModel;
 
-import java.lang.System.*;
-
 import static com.pd.pong.Pong.netmode;
 import static java.lang.System.out;
 
@@ -40,6 +38,10 @@ public class GameController implements ContactListener {
         if (model.getScore() >= MAX_SCORE) {
             onGameOver();
         }
+        Vector2 ballPos = model.getBall().getBody().getPosition();
+        if(ballPos.x < 0f || ballPos.x > 20f || ballPos.y < 0 || ballPos.y > 20f){
+            onGameOver();
+        }
     }
 
     private void onGameOver() {
@@ -61,7 +63,6 @@ public class GameController implements ContactListener {
 
     @Override
     public void endContact(Contact contact) {
-
     }
 
     @Override

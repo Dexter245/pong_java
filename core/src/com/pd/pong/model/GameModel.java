@@ -42,7 +42,7 @@ public class GameModel {
         //wallTop
         bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.StaticBody;
-        bodyDef.position.set(5, WORLD_HEIGHT + WALL_WIDTH);
+        bodyDef.position.set(5, WORLD_HEIGHT + WALL_WIDTH*1.0f);
         Walls.wallTop = world.createBody(bodyDef);
         shape = new PolygonShape();
         shape.setAsBox(5f, WALL_WIDTH);
