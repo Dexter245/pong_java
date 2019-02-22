@@ -5,6 +5,8 @@ import com.badlogic.gdx.physics.box2d.*;
 
 public class Ball {
 
+    public static final float SPEED = 1.0f;
+
     private Body body;
     private Fixture fixture;
 

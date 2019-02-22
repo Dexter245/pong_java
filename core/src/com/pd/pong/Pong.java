@@ -29,14 +29,13 @@ public class Pong extends ApplicationAdapter {
     }
 
     public enum Mode {
-        //        PLAY,
         SHOW,
         HIDE
     }
 
     public static Gamestate gamestate = Gamestate.RUNNING;
     public static Mode mode = Mode.SHOW;
-//    public static Mode mode = Mode.HIDE;
+    //    public static Mode mode = Mode.HIDE;
     public static boolean netmode = false;
     public static float finalScore = -1f;
 
@@ -46,7 +45,6 @@ public class Pong extends ApplicationAdapter {
     private World world;
 
     public static float getScore(Genome gene) {
-
 
         Pong pong = new Pong();
         Pong.setNetmode(true);
@@ -66,8 +64,6 @@ public class Pong extends ApplicationAdapter {
 
     @Override
     public void create() {
-//        out.println("pong create in thread: " + Thread.currentThread());
-
         Box2D.init();
         world = new World(new Vector2(0, 0), true);
 
@@ -88,29 +84,21 @@ public class Pong extends ApplicationAdapter {
 
     @Override
     public void render() {
-//        out.println("pong render");
-        float delta;
+        float delta = 1 / 60f;
         if (netmode && mode == Mode.HIDE) {
-            delta = 1 / 60f;
+
         } else {
-            delta = Gdx.graphics.getDeltaTime();
             Gdx.gl.glClearColor(0, 0, 0, 1);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         }
 
-        if(gamestate != Gamestate.GAMEOVER){
+        if (gamestate != Gamestate.GAMEOVER) {
             controller.update(delta);
             world.step(1 / 60f, 10, 10);
             renderer.render(delta);
-        }else{
-//            dispose();
+        } else {
             Gdx.app.exit();
-//            exit(0);
-//            dispose();
         }
-
-
-
     }
 
     public static void setNetmode(boolean netmode) {
@@ -119,8 +107,6 @@ public class Pong extends ApplicationAdapter {
 
     @Override
     public void dispose() {
-//        out.println("pong dispose");
-//        if(world != null)
         world.dispose();
     }
 }

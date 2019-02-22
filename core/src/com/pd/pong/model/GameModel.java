@@ -9,7 +9,7 @@ public class GameModel {
 
     public static final float WORLD_WIDTH = 10;
     public static final float WORLD_HEIGHT = 10f / (1280f / 720f);
-    private static final float WALL_WIDTH = 0.1f;
+    private static final float WALL_WIDTH = 1.0f;
 
     private World world;
     private Ball ball;
@@ -26,9 +26,8 @@ public class GameModel {
     public GameModel(World world) {
         this.world = world;
 //        ball = new Ball(world, new Vector2(5, 3));
-        float posx = (float) Math.random()*6 + 3;
-        float posy = (float) Math.random()*5 + 0;
-        out.println("posx: " + posx + ", posy: " + posy);
+        float posx = (float) Math.random() * 6 + 3;
+        float posy = (float) Math.random() * 5 + 0;
         ball = new Ball(world, new Vector2(posx, posy));
         playerBat = new Bat(world, new Vector2(0.5f, WORLD_HEIGHT / 2f));
 
@@ -68,6 +67,10 @@ public class GameModel {
 
     public void increaseScore(float amount) {
         score += amount;
+    }
+
+    public void decreaseScore(float amount) {
+        score -= amount;
     }
 
     public float getScore() {

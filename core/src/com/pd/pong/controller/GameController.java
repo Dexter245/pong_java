@@ -14,42 +14,37 @@ import static java.lang.System.out;
 
 public class GameController implements ContactListener {
 
-    private static final float BALL_SPEED = 1.0f;
+    private static final float SCORE_MULT_MOVING = 0.1f;
+    private static final float MAX_SCORE = 660f;
 
     private GameModel model;
     private BatController batController;
 
     public GameController(GameModel model) {
         this.model = model;
-        if(netmode){
+        if (netmode) {
             this.batController = new NetBatController(model);
-        }else{
+        } else {
             this.batController = new PlayerBatController(model.getPlayerBat(), model.getWorld());
         }
-        this.model.getBall().getBody().applyLinearImpulse(-BALL_SPEED, BALL_SPEED, 0f, 0f, true);
+        this.model.getBall().getBody().applyLinearImpulse(-Ball.SPEED * 0.9f, Ball.SPEED * 1.1f, 0f, 0f, true);
         this.model.getWorld().setContactListener(this);
     }
 
     public void update(float delta) {
-//        out.println("controller update");
         batController.update(delta);
-        model.increaseScore(delta);
-        if(model.getScore() >= 660){
+        if (!BatController.isMoving)
+            model.increaseScore(delta);
+        else
+            model.increaseScore(delta * SCORE_MULT_MOVING);
+        if (model.getScore() >= MAX_SCORE) {
             onGameOver();
         }
     }
 
     private void onGameOver() {
-//        out.println("GAMEOVER");
         Pong.finalScore = model.getScore();
         Pong.gamestate = Pong.Gamestate.GAMEOVER;
-        if (netmode){
-            return;
-        }
-        else{
-//            System.exit(0);
-            return;
-        }
     }
 
     @Override

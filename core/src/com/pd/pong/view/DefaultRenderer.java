@@ -31,8 +31,6 @@ public class DefaultRenderer implements Renderer {
         camera = new OrthographicCamera(width, height);
         camera.translate(x, y, 0f);
         camera.update();
-//        out.println("width: " + width + ", height. " + height + ", x: " + x + ", y: " + y);
-//        out.println("camera.position: " + camera.position);
 
         camera2 = new OrthographicCamera(1280, 720);
         camera2.update();
@@ -43,9 +41,8 @@ public class DefaultRenderer implements Renderer {
 
     @Override
     public void render(float delta) {
-//        out.println("defaultRenderer render");
         batch.begin();
-        float score = Math.round(model.getScore()*10)/10f;
+        float score = Math.round(model.getScore() * 10) / 10f;
         font.draw(batch, "Score: " + score, 0f, 0f);
         batch.end();
 
